@@ -25,8 +25,12 @@ public class Frame {
                 .orElse(null);
         if (res==null)
             return false;
-        else
-            if (Integer.parseInt(rolls.get(2))==10) return true;
+        else {
+            if ("F".equals(rolls.get(2)))
+                return false;
+            else if (Integer.parseInt(rolls.get(2)) == 10)
+                return true;
+        }
         Integer result=rolls.stream()
                 .mapToInt(Integer::parseInt)
                 .sum();

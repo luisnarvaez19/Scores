@@ -19,7 +19,7 @@ public class App
             stream
                    // .filter(line -> line.contains("print"))
                     .map(String::trim)
-                    .forEach(System.out::println);
+                    .forEach(x->Game.readLineFile(x));
         } catch (IOException e) {
             e.printStackTrace();
         }

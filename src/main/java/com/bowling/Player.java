@@ -5,6 +5,7 @@ import java.util.List;
 public class Player {
     private String name;        //  Player name
     private Integer gamescore;  //  Total line score
+    private Line line;
 
 
     public String getName() {
@@ -24,4 +25,11 @@ public class Player {
     }
 
 
+    public Line getLine() {
+        return line;
+    }
+
+    public void setLine(Line line) {
+        this.line = line;
+    }
 }
