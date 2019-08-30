@@ -14,15 +14,19 @@ public class App
     public static void main( String[] args )
     {
 
-        System.out.println( "Hello World!" );
+        System.out.println( "Welcome to the Bowling" );
+        Game game=new Game();
+        game.setCurrentPlayer(null);
+        // Read the file with the Game's data
         try (Stream<String> stream = Files.lines(Paths.get("scores.txt"))) {
             stream
-                   // .filter(line -> line.contains("print"))
                     .map(String::trim)
                     .forEach(x->Game.readLineFile(x));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println( "Hello World! Final2" );
+        game.scoreGame();
+
+        System.out.println( "Game over" );
     }
 }

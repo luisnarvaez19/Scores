@@ -2,7 +2,7 @@ package com.bowling;
 
 import java.util.List;
 
-public class Frame {
+public class Frame implements aboutFrame {
     private List<String> rolls;   //  Rolls  in a frame
 
 
@@ -14,11 +14,14 @@ public class Frame {
         this.rolls = rolls;
     }
 
-    /**
-     *   Calculate if a frame is a spare
-     * @return  true if is a spare
-     */
-    public Boolean isSpare(){
+
+    @Override
+    public Boolean sumMore10(Frame frame) {
+        return null;
+    }
+
+    @Override
+    public Boolean isSpare(Frame frame) {
         String res=rolls.stream()
                 .filter(x -> "F".equals(x))
                 .findAny()
@@ -36,15 +39,4 @@ public class Frame {
                 .sum();
         return (result==10);
     }
-
-    /**
-     *  Calculate if the frame is bad like:  negatives numbers, characters not allowed,
-     *                                       sum more than 10
-     * @return null is the frame is good else the reason why is wrong
-     */
-    public String isBadFrame(){
-        return null;
-    }
-
-
 }
