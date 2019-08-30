@@ -33,5 +33,14 @@ public class Frame {
         return (result==10);
     }
 
+    /**
+     *  Calculate if the frame is bad like:  negatives numbers, characters not allowed,
+     *                                       sum more than 10
+     * @return null is the frame is good else the reason why is wrong
+     */
+    public String isBadFrame(){
+        return null;
+    }
+
 
 }
