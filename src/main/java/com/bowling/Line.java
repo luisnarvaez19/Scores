@@ -94,6 +94,15 @@ public class Line implements AboutLine {
         System.out.println(" ");
     }
 
+    /**
+     * Calculate the score and print it
+     *
+     * @param player :  The player
+     */
+    @Override
+    public void printScore(Player player) {
+
+    }
 
 
 }

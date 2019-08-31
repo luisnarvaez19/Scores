@@ -70,7 +70,7 @@ public class Game implements AboutGame {
      */
     @Override
     public void scoreGame() {
-        System.out.println("Frame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t\t\t7\t\t8\t\t9\t\t10");
+        System.out.println("Frame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10");
         game.stream()
                 .forEach(x->x.getLine().printMe(x));
 

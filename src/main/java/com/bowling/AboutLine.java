@@ -20,4 +20,11 @@ public interface AboutLine {
      * @param player:  The player
      */
     public void printMe(Player player);
+
+
+    /**
+     * Calculate the score and print it
+     * @param player:  The player
+     */
+    public void printScore(Player player);
 }
