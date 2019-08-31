@@ -1,6 +1,6 @@
 package com.bowling;
 
-public interface aboutFrame {
+public interface AboutFrame {
     /**
      *  Verify if the sum > 10
      * @return true is the sum > 10
@@ -13,4 +13,11 @@ public interface aboutFrame {
      */
     public Boolean isSpare(Frame frame);
 
+    /**
+     * Add a frame with one number num
+     *
+     * @param num
+     * @return
+     */
+    public Frame addFrame(String num);
 }

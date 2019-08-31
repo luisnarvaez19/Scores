@@ -16,12 +16,11 @@ public class App
 
         System.out.println( "Welcome to the Bowling" );
         Game game=new Game();
-        game.setCurrentPlayer(null);
         // Read the file with the Game's data
         try (Stream<String> stream = Files.lines(Paths.get("scores.txt"))) {
             stream
                     .map(String::trim)
-                    .forEach(x->Game.readLineFile(x));
+                    .forEach(x->game.processData(x));
         } catch (IOException e) {
             e.printStackTrace();
         }
