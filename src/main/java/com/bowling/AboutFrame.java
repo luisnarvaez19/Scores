@@ -15,14 +15,14 @@ package com.bowling;
 
 
     /**
-     * Calculate one frame in the position i
+     *  Calculate one frame in the position i
      *
-     * @param line  Line's values
-     * @param i :  Calculate frame for the position i
-     * @param anterior:  Value before i
-     * @return value of position i
+     * @param line:     Line's values
+     * @param i:        Calculate frame for the position i
+     * @param previous  The value previous in the score
+     * @param times     recursion's time
+     * @return
      */
-      Integer sumFrame(Line line,Integer i,  Integer anterior);
-
+      Integer totFrame(Line line,Integer i,  Integer previous,  Integer times);
 
 }

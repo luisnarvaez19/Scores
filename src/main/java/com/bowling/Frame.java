@@ -45,9 +45,7 @@ public class Frame implements AboutFrame {
         if ("F".equals(frame.getRolls().get(1)))
             return false;
         if ("F".equals(frame.getRolls().get(0))) {
-          if (Integer.parseInt(frame.getRolls().get(1)) == 10)
-            return true;
-          else return false;
+          return (Integer.parseInt(frame.getRolls().get(1)) == 10);
         }
         Integer result=frame.getRolls().stream()
                 .mapToInt(Integer::parseInt)
@@ -56,75 +54,62 @@ public class Frame implements AboutFrame {
     }
 
     /**
-     * Calculate one frame in the position i
+     *  Calculate one frame in the position i
      *
-     * @param line  Line's values
-     * @param i :  Calculate frame for the position i
-     * @param previous:  Value before i
-     * @return value of position i
+     * @param line:     Line's values
+     * @param i:        Calculate frame for the position i
+     * @param previous  The value previous in the score
+     * @param times     recursion's time
+     * @return
      */
     @Override
-    public Integer sumFrame(Line line, Integer i, Integer previous) {
+    public Integer totFrame(Line line, Integer i, Integer previous,  Integer times) {
         Integer result=0;
-        Integer num0;
-        Integer num1;
+        Integer num0,num1;
         Frame frame=line.getFrames().get(i);
-        String value0;
-        String value1;
+        String value0, value1;
         String value=frame.getRolls().get(1);
 
         //System.out.println("La i  es: "+i+" el valor es: "+value);
 
-        if (i==9) {
-            value0=line.getFrames().get(i).getRolls().get(0);
-            value1=line.getFrames().get(i).getRolls().get(1);
-            String value2="0";
-            if (value0.equals("X"))
-                value2=line.getFrames().get(i).getRolls().get(2);
-            if ((value0.equals("X")) && (value1.equals("X")) && (value2.equals("X")))
-                return 30+previous;
-            else {
-                if (value0.equals("X")) {
-                    num0 = Game.isNumeric(value1);
-                    num1 = Game.isNumeric(value2);
-                    return 10 + num0  + num1 + previous;
-                } else {
-                    num0 = Game.isNumeric(value0);
-                    num1 = Game.isNumeric(value1);
-                    return num0  + num1 + previous;
-                }
-            }
-
-        }
-
-        if ((!(value.equals("X"))) &&  (!(value.equals("/")))) {
+        //  Check that the value is a number
+        if ((!(value.equals("X"))) && (!(value.equals(" "))) &&  (!(value.equals("/")))) {
+            if (times==2) return Game.isNumeric(frame.getRolls().get(0));
             num0=Game.isNumeric(frame.getRolls().get(0));
             num1=Game.isNumeric(frame.getRolls().get(1));
             result = num0+num1;
         } else {
             if (value.equals("/")) {
+                if (times==1) return 10;   //  Recursion for X first time
+                if (times==2) return Game.isNumeric(frame.getRolls().get(0));
+                // It is not the last turn
                 if (i!=9) {
                     value=line.getFrames().get(i+1).getRolls().get(0);
                     num0=Game.isNumeric(value);
                     if (num0!=null)
                         result =  num0+10;
                     else
-                        result = 20;  //  Is X
+                        result = 20;  //  It is X
                 }
             } else {   //  value is X
                 if (i<8) {
-                    result += calculateX(line,i+1, 1);
+                    if  (times<2)
+                        result += 10 + totFrame(line,i+1,0,times+1);
+                    else
+                        return result+10;
                 } else {
+                    if ((i==8) && (times==1)) {   //  Recursion for X first time
+                        value0=line.getFrames().get(i+1).getRolls().get(0);
+                        if (value0.equals("X")) return 20;
+                        else return 10+Game.isNumeric(value0);
+                    }
                     if (i==8) {
                         value0=line.getFrames().get(i+1).getRolls().get(0);
                         value1=line.getFrames().get(i+1).getRolls().get(1);
-                        if ((value0.equals("X")) && (value1.equals("X")) )
-                            result = 20;
+                        if ((value0.equals("X")) && (value1.equals("X")) ) result = 20;
                         else {
-                            if (value0.equals("X")) {
-                                num0 = Game.isNumeric(value1);
-                                result = 20 + num0  ;
-                            }
+                            if (value0.equals("X")) result = 20 + Game.isNumeric(value1);
+                            else result += 10+Game.isNumeric(value0)+Game.isNumeric(value1);
                         }
                     }
                 }
@@ -134,44 +119,6 @@ public class Frame implements AboutFrame {
             return result;
         else
             return previous+result;
-    }
-
-    /**
-     * Calculate when is strike
-     * @param line
-     * @param i
-     * @return
-     */
-    private Integer calculateX(Line line, Integer i, Integer times){
-        Integer result=10;
-        String value0="";
-        String value=line.getFrames().get(i).getRolls().get(1);
-        Integer num0=Game.isNumeric(value);
-        if (num0!=null)
-            result +=  sumFrame(line,i,0);
-        else {
-            if (value.equals("/"))
-                result += 10;
-            else {  // is X
-                if (i+1==9) {
-                    value0=line.getFrames().get(i+1).getRolls().get(0);
-                    if (value0.equals("X"))
-                        result += 20 ;
-                    else {
-                        num0=Game.isNumeric(value0);
-                        result += 10 + num0;
-                    }
-                } else {
-                    if  (times==1)
-                        result += calculateX(line, i+1, 2);
-                    else
-                        return result+10;
-
-                }
-
-            }
-        }
-        return result;
     }
 
 

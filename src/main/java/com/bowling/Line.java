@@ -110,9 +110,37 @@ public class Line implements AboutLine {
             Frame frame=this.getFrames().get(i);
             Integer size=frame.getRolls().size();
             if (i==0)
-                score[i]=frame.sumFrame(this,i, 0);
-            else
-                score[i]=frame.sumFrame(this,i, score[i-1] );
+                //score[i]=frame.sumFrame(this,i, 0);
+                score[i]=frame.totFrame(this,i,0,0);
+            else {
+                if (i<9)
+                    //score[i]=frame.sumFrame(this,i, score[i-1] );
+                    score[i]=frame.totFrame(this,i,score[i-1] ,0);
+                else {
+                    Integer num0, num1;
+                    String value0=getFrames().get(i).getRolls().get(0);
+                    String value1=getFrames().get(i).getRolls().get(1);
+                    String value2="0";
+                    if (value0.equals("X"))
+                        value2=getFrames().get(i).getRolls().get(2);
+                    if ((value0.equals("X")) && (value1.equals("X")) && (value2.equals("X")))
+                        score[i] = 30+score[i-1];
+                    else {
+                        if (value0.equals("X")) {
+                            num0 = Game.isNumeric(value1);
+                            num1 = Game.isNumeric(value2);
+                            score[i] = 10 + num0  + num1 + score[i-1];
+                        } else {
+                            num0 = Game.isNumeric(value0);
+                            num1 = Game.isNumeric(value1);
+                            score[i] = num0  + num1 + score[i-1];
+                        }
+                    }
+                }
+
+            }
+
+
 //            if (i==0)
 //                System.out.println("Score "+i+" es: "+score[i]+" anterior "+0);
 //            else
