@@ -1,6 +1,7 @@
 package com.bowling;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Line implements AboutLine {
@@ -10,6 +11,7 @@ public class Line implements AboutLine {
 
     public Line(){
         this.frames=new ArrayList<>();
+        this.score= new Integer[10];
     }
 
     public List<Frame> getFrames() {
@@ -44,7 +46,6 @@ public class Line implements AboutLine {
     @Override
     public String addScore(Player player,  String value) {
         Integer pos=player.getNroThrows();
-        System.out.println("El nroTrows is: "+pos);
         Integer frames=this.getFrames().size();
         Frame frame=this.getFrames().get(frames-1);
         Integer num=Game.isNumeric(value);
@@ -58,7 +59,6 @@ public class Line implements AboutLine {
                 return null;
             }
             frame.getRolls().add(value);
-            System.out.println("Add the value: "+value);
         }
         if (pos>0) {
             if ((frames != 10) && (frame.sumMore10(frame)) )
@@ -92,6 +92,7 @@ public class Line implements AboutLine {
                             });
                 //.forEach(x->System.out.print(x.getRolls().size()+"\t"));
         System.out.println(" ");
+        printScore(player);
     }
 
     /**
@@ -102,6 +103,22 @@ public class Line implements AboutLine {
     @Override
     public void printScore(Player player) {
 
+        for (int i=0;i < 10; i++){
+            Frame frame=this.getFrames().get(i);
+            Integer size=frame.getRolls().size();
+            if (i==0)
+                score[i]=frame.sumFrame(this,i, 0);
+            else
+                score[i]=frame.sumFrame(this,i, score[i-1] );
+            if (i==0)
+                System.out.println("Score "+i+" es: "+score[i]+" anterior "+0);
+            else
+                System.out.println("Score "+i+" es: "+score[i]+" anterior "+score[i-1]);
+
+        }
+        System.out.print("Score\t");
+        Arrays.stream(this.score)
+                .forEach(x->System.out.println(x));
     }
 
 

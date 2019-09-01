@@ -42,7 +42,6 @@ public class Game implements AboutGame {
      */
     public void processData(String line){
 
-        System.out.println("La linea es: "+line);
         String[] splitted = line.split("\t");
         //System.out.println("RL: "+linea+" tam: "+splitted.length+" name: "+splitted[0]);
 
@@ -70,10 +69,9 @@ public class Game implements AboutGame {
      */
     @Override
     public void scoreGame() {
-        System.out.println("Frame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10");
+        System.out.println("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10");
         game.stream()
                 .forEach(x->x.getLine().printMe(x));
-
     }
 
     /**
@@ -129,7 +127,6 @@ public class Game implements AboutGame {
     public String addThrow(String name, String val) {
         Player p=new Player();
         Player player=p.existPlayer(this.game,name);
-        System.out.println("Current is: "+currentPlayer);
         if (!(this.currentPlayer.equals(name))) {
              if (player==null) {
                  //  The player is created
@@ -154,6 +151,7 @@ public class Game implements AboutGame {
      * @return the number else null
      */
     public static Integer isNumeric(String strNum) {
+        if (strNum.equals("F")) return(0);
         Integer d = null;
         try {
             d = Integer.parseInt(strNum);

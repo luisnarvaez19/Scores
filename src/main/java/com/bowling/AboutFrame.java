@@ -14,10 +14,14 @@ public interface AboutFrame {
     public Boolean isSpare(Frame frame);
 
     /**
-     * Add a frame with one number num
      *
-     * @param num
+     * Calculate one frame in the position i
+     *
+     * @param line  Line's values
+     * @param i :  Calculate frame for the position i
+     * @param anterior:  Value before i
      * @return
      */
-    public Frame addFrame(String num);
+    public Integer sumFrame(Line line,Integer i,  Integer anterior);
+
 }
