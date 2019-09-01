@@ -113,7 +113,7 @@ public class Frame implements AboutFrame {
                 }
             } else {   //  value is X
                 if (i<8) {
-                    result += calculaX(line,i+1, 1);
+                    result += calculateX(line,i+1, 1);
                 } else {
                     if (i==8) {
                         value0=line.getFrames().get(i+1).getRolls().get(0);
@@ -142,7 +142,7 @@ public class Frame implements AboutFrame {
      * @param i
      * @return
      */
-    private Integer calculaX(Line line, Integer i, Integer times){
+    private Integer calculateX(Line line, Integer i, Integer times){
         Integer result=10;
         String value0="";
         String value=line.getFrames().get(i).getRolls().get(1);
@@ -163,7 +163,7 @@ public class Frame implements AboutFrame {
                     }
                 } else {
                     if  (times==1)
-                        result += calculaX(line, i+1, 2);
+                        result += calculateX(line, i+1, 2);
                     else
                         return result+10;
 
