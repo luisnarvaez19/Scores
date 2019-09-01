@@ -1,17 +1,17 @@
 package com.bowling;
 
-public interface AboutFrame {
+  interface AboutFrame {
     /**
      *  Verify if the sum > 10
      * @return true is the sum > 10
      */
-    public Boolean sumMore10(Frame frame);
+      Boolean sumMore10(Frame frame);
 
     /**
      *   Calculate if a frame is a spare
      * @return  true if is a spare
      */
-    public Boolean isSpare(Frame frame);
+      Boolean isSpare(Frame frame);
 
 
     /**
@@ -22,7 +22,7 @@ public interface AboutFrame {
      * @param anterior:  Value before i
      * @return value of position i
      */
-    public Integer sumFrame(Line line,Integer i,  Integer anterior);
+      Integer sumFrame(Line line,Integer i,  Integer anterior);
 
 
 }

@@ -1,18 +1,18 @@
 package com.bowling;
 
-public interface AboutGame {
+  interface AboutGame {
 
     /**
      *    Print the score game for the players
      */
-    public void scoreGame();
+      void scoreGame();
 
     /**
      * Check if the player has already been ruled out due to a previous error
      * @param data
      * @return
      */
-    public Boolean existBlackList(String data);
+      Boolean existBlackList(String data);
 
 
     /**
@@ -22,7 +22,7 @@ public interface AboutGame {
      * @param data data player's line
      * @return null if the fields are good else the reason why is wrong
      */
-    public String areBadFields( String linea);
+      String areBadFields( String linea);
 
     /**
      *
@@ -30,7 +30,7 @@ public interface AboutGame {
      * @param val
      * @return  null if add a throw good
      */
-    public String addThrow(String name, String val);
+      String addThrow(String name, String val);
 
 
 }

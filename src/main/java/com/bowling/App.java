@@ -13,7 +13,6 @@ public class App
 {
     public static void main( String[] args )
     {
-
         System.out.println( "Welcome to the Bowling");
         Game game=new Game();
         // Read the file with the Game's data

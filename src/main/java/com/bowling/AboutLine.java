@@ -1,10 +1,10 @@
 package com.bowling;
 
-public interface AboutLine {
+  interface AboutLine {
     /**
      * Add a frame to the line
      */
-    public void addFrame();
+      void addFrame();
 
     /**
      * Add a score to the last frame in a line
@@ -12,19 +12,19 @@ public interface AboutLine {
      * @param value  Value to add
      * @return  null if add good else the message
      */
-    public String addScore(Player player, String value);
+      String addScore(Player player, String value);
 
 
     /**
      * Print the line of the player
      * @param player:  The player
      */
-    public void printMe(Player player);
+      void printMe(Player player);
 
 
     /**
      * Calculate the score and print it
      * @param player:  The player
      */
-    public void printScore(Player player);
+      void printScore(Player player);
 }

@@ -66,12 +66,11 @@ public class Frame implements AboutFrame {
     @Override
     public Integer sumFrame(Line line, Integer i, Integer anterior) {
         Integer resultado=0;
-        Integer num0=0;
-        Integer num1=0;
-        Integer num2=0;
+        Integer num0;
+        Integer num1;
         Frame frame=line.getFrames().get(i);
-        String value0="";
-        String value1="";
+        String value0;
+        String value1;
         String value=frame.getRolls().get(1);
 
         //System.out.println("La i  es: "+i+" el valor es: "+value);

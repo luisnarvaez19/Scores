@@ -154,7 +154,7 @@ public class Game implements AboutGame {
      */
     public static Integer isNumeric(String strNum) {
         if (strNum.equals("F")) return(0);
-        Integer d = null;
+        Integer d;
         try {
             d = Integer.parseInt(strNum);
         } catch (NumberFormatException | NullPointerException nfe) {
