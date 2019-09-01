@@ -56,13 +56,12 @@ public class Frame implements AboutFrame {
     }
 
     /**
-     *
      * Calculate one frame in the position i
      *
      * @param line  Line's values
      * @param i :  Calculate frame for the position i
      * @param anterior:  Value before i
-     * @return
+     * @return value of position i
      */
     @Override
     public Integer sumFrame(Line line, Integer i, Integer anterior) {
@@ -75,12 +74,14 @@ public class Frame implements AboutFrame {
         String value1="";
         String value=frame.getRolls().get(1);
 
-      //  System.out.println("La i  es: "+i+" el valor es: "+value);
+        //System.out.println("La i  es: "+i+" el valor es: "+value);
 
         if (i==9) {
             value0=line.getFrames().get(i).getRolls().get(0);
             value1=line.getFrames().get(i).getRolls().get(1);
-            String value2=line.getFrames().get(i).getRolls().get(2);
+            String value2="0";
+            if (value0.equals("X"))
+                value2=line.getFrames().get(i).getRolls().get(2);
             if ((value0.equals("X")) && (value1.equals("X")) && (value2.equals("X")))
                 return 30+anterior;
             else {
@@ -88,12 +89,16 @@ public class Frame implements AboutFrame {
                     num0 = Game.isNumeric(value1);
                     num1 = Game.isNumeric(value2);
                     return 10 + num0  + num1 + anterior;
+                } else {
+                    num0 = Game.isNumeric(value0);
+                    num1 = Game.isNumeric(value1);
+                    return num0  + num1 + anterior;
                 }
             }
 
         }
 
-        if ((!(value.equals("X"))) && (!(value.equals("/")))) {
+        if ((!(value.equals("X"))) &&  (!(value.equals("/")))) {
             num0=Game.isNumeric(frame.getRolls().get(0));
             num1=Game.isNumeric(frame.getRolls().get(1));
             resultado = num0+num1;
@@ -109,47 +114,19 @@ public class Frame implements AboutFrame {
                 }
             } else {   //  value is X
                 if (i<8) {
-
-//                        value=line.getFrames().get(i+1).getRolls().get(1);
-//                        num0=Game.isNumeric(value);
-//                        if (num0!=null)
-//                            resultado +=  10 + sumFrame(line,i+1, 0);
-//                        else {
-//                            if (value.equals("/"))
-//                                resultado += 20;
-//                            else {  // is X
-//                                if (i+2==9) {
-//                                    value0=line.getFrames().get(i+2).getRolls().get(0);
-//                                    if (value0.equals("X"))
-//                                        resultado += 30 ;
-//                                    else {
-//                                        num0=Game.isNumeric(value0);
-//                                        resultado += 20 + num0;
-//                                    }
-//                                } else
-//                                    resultado += sumFrame(line,i+2, 0);
-//
-//                            }
-//                        }
+                    resultado += calculaX(line,i+1, 1);
                 } else {
-                    if ((i==8) && (anterior==0)) {
-                        value=line.getFrames().get(i+1).getRolls().get(0);
-                        if (value.equals("X"))  resultado = 10;
-
-                    } else {
-                        if (i==8) {
-                            value0=line.getFrames().get(i+1).getRolls().get(0);
-                            value1=line.getFrames().get(i+1).getRolls().get(1);
-                            if ((value0.equals("X")) && (value1.equals("X")) )
-                                resultado = 20;
-                            else {
-                                if (value0.equals("X")) {
-                                    num0 = Game.isNumeric(value1);
-                                    resultado = 20 + num0  ;
-                                }
+                    if (i==8) {
+                        value0=line.getFrames().get(i+1).getRolls().get(0);
+                        value1=line.getFrames().get(i+1).getRolls().get(1);
+                        if ((value0.equals("X")) && (value1.equals("X")) )
+                            resultado = 20;
+                        else {
+                            if (value0.equals("X")) {
+                                num0 = Game.isNumeric(value1);
+                                resultado = 20 + num0  ;
                             }
                         }
-
                     }
                 }
             }
@@ -158,6 +135,44 @@ public class Frame implements AboutFrame {
             return resultado;
         else
             return anterior+resultado;
+    }
+
+    /**
+     * Calculate when is strike
+     * @param line
+     * @param i
+     * @return
+     */
+    private Integer calculaX(Line line, Integer i, Integer times){
+        Integer resultado=10;
+        String value0="";
+        String value=line.getFrames().get(i).getRolls().get(1);
+        Integer num0=Game.isNumeric(value);
+        if (num0!=null)
+            resultado +=  sumFrame(line,i,0);
+        else {
+            if (value.equals("/"))
+                resultado += 10;
+            else {  // is X
+                if (i+1==9) {
+                    value0=line.getFrames().get(i+1).getRolls().get(0);
+                    if (value0.equals("X"))
+                        resultado += 20 ;
+                    else {
+                        num0=Game.isNumeric(value0);
+                        resultado += 10 + num0;
+                    }
+                } else {
+                    if  (times==1)
+                        resultado += calculaX(line, i+1, 2);
+                    else
+                        return resultado+10;
+
+                }
+
+            }
+        }
+        return resultado;
     }
 
 

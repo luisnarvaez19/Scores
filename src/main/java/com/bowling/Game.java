@@ -99,19 +99,19 @@ public class Game implements AboutGame {
      * @return null if the fields are good else the reason why is wrong
      */
     @Override
-    public String areBadFields(String linea) {
-        String[] splitted = linea.split("\t");
+    public String areBadFields(String line) {
+        String[] splitted = line.split("\t");
 
         if (splitted.length!=2)
-            return("Error in the line: "+linea+". Error with the player: "+splitted[0]+", the data is not good, must be two fields ");
+            return("Error in the line: "+line+". Error with the player: "+splitted[0]+", the data is not good, must be two fields ");
         else {
             String value2=splitted[1];
             Integer num=isNumeric(value2);
             if (num!=null) {
-              if (num>10)  return("Error in the line:  "+linea+". Error in the number of pines. It cannot be greater than 10");
+              if (num>10)  return("Error in the line:  "+line+". Error in the number of pines. It cannot be greater than 10");
             } else {
                 if (!("F".equals(value2)))
-                    return("Error in the line:  "+linea+". Only the character F is accepted. No other character");
+                    return("Error in the line:  "+line+". Only the character F is accepted. No other character");
             }
         }
         return null;

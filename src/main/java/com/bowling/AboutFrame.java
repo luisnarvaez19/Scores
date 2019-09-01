@@ -13,15 +13,16 @@ public interface AboutFrame {
      */
     public Boolean isSpare(Frame frame);
 
+
     /**
-     *
      * Calculate one frame in the position i
      *
      * @param line  Line's values
      * @param i :  Calculate frame for the position i
      * @param anterior:  Value before i
-     * @return
+     * @return value of position i
      */
     public Integer sumFrame(Line line,Integer i,  Integer anterior);
+
 
 }
