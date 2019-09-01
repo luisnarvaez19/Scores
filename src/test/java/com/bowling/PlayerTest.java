@@ -13,14 +13,14 @@ public class PlayerTest {
     public void testExistPlayer(){
         //System.out.println("testExistPlayer: ");
         Player p=new Player();
-        Player p1=p.addPlayer("Luis");
-        Player p2=p.addPlayer("Carlos");
+        Player p1=p.addPlayer("Jeff");
+        Player p2=p.addPlayer("John");
 
         List<Player> game= Arrays.asList(p1,p2);
-        String data="Luis";
+        String testCase="John";
 
-        Player playerFound=p.existPlayer(game,data);
-        assertEquals(playerFound,p1);
+        Player playerFound=p.existPlayer(game,testCase);
+        assertEquals(playerFound,p2);
 
     }
 }

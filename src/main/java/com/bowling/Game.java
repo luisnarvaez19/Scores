@@ -12,6 +12,14 @@ public class Game implements AboutGame {
 
     private List<String> blackList;
 
+    public List<String> getBlackList() {
+        return blackList;
+    }
+
+    public void setBlackList(List<String> blackList) {
+        this.blackList = blackList;
+    }
+
     public Game(){
         this.game=new ArrayList<>();
         this.blackList=new ArrayList<>();
@@ -44,21 +52,25 @@ public class Game implements AboutGame {
 
         String[] splitted = line.split("\t");
         //System.out.println("RL: "+linea+" tam: "+splitted.length+" name: "+splitted[0]);
-
+        Player p=new Player();
         //  areBadFields is null there is not bad fields
         //  existBlackList is null the player was not removed previously
         String message=areBadFields(line);
         String name = splitted[0];
         if ((message==null) && (!(existBlackList(name)))){
             String athrow=addThrow(splitted[0],splitted[1]);
-            if (athrow!=null)
+            if (athrow!=null) {
                 System.out.println(athrow);
+                p.removePlayer(this,name);
+            }
+
         } else {
             if (message!=null) {
                 System.out.println(message);
-                this.blackList.add(name);
-            } else
+            } else {
                 System.out.println("The player:  "+name+" have bad records.  It was deleted.");
+            }
+            p.removePlayer(this,name);
         }
 
     }
@@ -71,7 +83,7 @@ public class Game implements AboutGame {
     public void scoreGame() {
         System.out.println("\n\nFrame\t\t1\t\t2\t\t3\t\t4\t\t5\t\t6\t\t7\t\t8\t\t9\t\t10");
         game.stream()
-                .forEach(x->x.getLine().printMe(x));
+                .forEach(player->player.getLine().printMe(player));
     }
 
     /**
@@ -81,12 +93,12 @@ public class Game implements AboutGame {
      * @return
      */
     @Override
-    public Boolean existBlackList(String data) {
-        String blackList=this.blackList.stream()
-                .filter(x -> x.equals(data))
+    public Boolean existBlackList(String exist) {
+        String result=blackList.stream()
+                .filter(name -> name.equals(exist))
                 .findAny()
                 .orElse(null);
-        return (blackList!=null);
+        return (result!=null);
     }
 
 
@@ -95,7 +107,7 @@ public class Game implements AboutGame {
      * Verify data line has only two fields
      * Verify data line first field is String, second field is a integer or a F
      *
-     * @param linea data player's line
+     * @param line data player's line
      * @return null if the fields are good else the reason why is wrong
      */
     @Override
@@ -103,7 +115,7 @@ public class Game implements AboutGame {
         String[] splitted = line.split("\t");
 
         if (splitted.length!=2)
-            return("Error in the line: "+line+". Error with the player: "+splitted[0]+", the data is not good, must be two fields ");
+            return("Error in the line: "+line+". Error with the player: "+splitted[0]+", the data is not good, must be two fields or the rows are not tab-separated ");
         else {
             String value2=splitted[1];
             Integer num=isNumeric(value2);
@@ -139,10 +151,14 @@ public class Game implements AboutGame {
         }
         String message= player.getLine().addScore(player,val);
         Integer frames=player.getLine().getFrames().size();
+        if (frames>10) {
+            this.currentPlayer="";
+            return ("The player: "+player.getName()+" made more than 10 frames");
+        }
         if ((val.equals("10") && (frames!=10))) this.currentPlayer="";
         if (message!=null) {
             System.out.println(message);
-            this.blackList.add(player.getName());
+            p.removePlayer(this,name);
         }
         return null;
 

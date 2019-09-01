@@ -11,21 +11,22 @@ import java.util.List;
      * @param data
      * @return null if not exist the player
      */
-      Player existPlayer( List<Player> game, String data);
+     Player existPlayer( List<Player> game, String data);
 
     /**
      *
      * @param data
      * @return Player
      */
-      Player addPlayer(String data);
+     Player addPlayer(String data);
 
     /**
-     *   Remove a player if his data is bad
-     * @param player
-     * @return  true if remove was right
+     *  Remove a player due to errors
+     * @param game;  game that is running
+     * @param name: player's name  will be removed
+     *
      */
-      Boolean removePlayer(Player player);
+     void removePlayer(Game game,String name);
 
 
 

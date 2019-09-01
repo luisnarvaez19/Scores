@@ -42,29 +42,36 @@ public class Line implements AboutLine {
     @Override
     public String addScore(Player player,  String value) {
         Integer pos=player.getNroThrows();
+        //  Player's turns.  Max: 10 turns
         Integer frames=this.getFrames().size();
+        // The frame or turn of the player
         Frame frame=this.getFrames().get(frames-1);
         Integer num=Game.isNumeric(value);
+        // The player made a strike
         if ((pos==0) && (num!=null) && (num==10) && (frames!=10)) {
             frame.getRolls().add(" ");
             frame.getRolls().add("X");
             return null;
         } else {
+            // The player made a strike in the last turn
             if ((num!=null) && (num==10) && (frames==10)) {
                 frame.getRolls().add("X");
                 return null;
             }
             frame.getRolls().add(value);
         }
+        // Is the second row in a frame. Check special cases like sumMore10
         if (pos>0) {
             if ((frames != 10) && (frame.sumMore10(frame)) )
-                return ("Error adding score the frame's sum is greater 10");
+                return ("Error adding score to: "+player.getName()+" the frame's sum is greater 10");
             if ((frames != 10) && (frame.isSpare(frame)) ) {
                 frame.getRolls().remove(frame.getRolls().size()-1);
                 frame.getRolls().add("/");
             }
-            if (frames!=10) {
-                return null;
+            pos=player.getNroThrows();
+            // Check if number of throws is correct
+            if (((frames!=10) && (pos>2)) || ((frames==10) && (pos>3))){
+                return ("The player: "+player.getName()+" has a lot of throws for a frame");
             }
         }
         return null;

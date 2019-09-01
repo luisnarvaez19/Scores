@@ -30,8 +30,8 @@ public class Player implements AboutPlayer {
 
 
     public Integer getNroThrows() {
-        Integer size=this.line.getFrames().size();
-        Frame frame=this.line.getFrames().get(size-1);
+        Integer size=this.line.getFrames().size();  // Number of frames
+        Frame frame=this.line.getFrames().get(size-1);  // The last frame
         return frame.getRolls().size();
     }
 
@@ -71,14 +71,17 @@ public class Player implements AboutPlayer {
     }
 
     /**
-     * Remove a player if his data is bad
+     * Remove a player due to errors
      *
-     * @param player
-     * @return true if remove was right
+     * @param game ;  game that is running
+     * @param name : player's name  will be removed
      */
     @Override
-    public Boolean removePlayer(Player player) {
-        return null;
+    public void removePlayer(Game game, String name) {
+        Player player=existPlayer(game.getGame(),name);
+        if (player!=null) game.getGame().remove(player);
+        if (!(game.existBlackList(name))) game.getBlackList().add(name);
+        game.setCurrentPlayer("");
     }
 
     @Override
