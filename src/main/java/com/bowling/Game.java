@@ -137,6 +137,8 @@ public class Game implements AboutGame {
              this.currentPlayer=name;
         }
         String message= player.getLine().addScore(player,val);
+        Integer frames=player.getLine().getFrames().size();
+        if ((val.equals("10") && (frames!=10))) this.currentPlayer="";
         if (message!=null) {
             System.out.println(message);
             this.blackList.add(player.getName());

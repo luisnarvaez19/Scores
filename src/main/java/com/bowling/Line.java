@@ -29,10 +29,6 @@ public class Line implements AboutLine {
     @Override
     public void addFrame() {
         Frame frame= new Frame();
-//        frame.getRolls().add(" ");
-//        frame.getRolls().add(" ");
-//        if (this.getFrames().size()==9)
-//            frame.getRolls().add(" ");
         this.getFrames().add(frame);
     }
 
@@ -54,7 +50,7 @@ public class Line implements AboutLine {
             frame.getRolls().add("X");
             return null;
         } else {
-            if ((pos==0) && (num!=null) && (num==10) && (frames==10)) {
+            if ((num!=null) && (num==10) && (frames==10)) {
                 frame.getRolls().add("X");
                 return null;
             }
@@ -90,7 +86,7 @@ public class Line implements AboutLine {
                                 else
                                     System.out.print(x.getRolls().get(0)+"\t"+x.getRolls().get(1)+"\t"+x.getRolls().get(2)+"\t");
                             });
-                //.forEach(x->System.out.print(x.getRolls().size()+"\t"));
+//                .forEach(x->System.out.print(x.getRolls().size()+"\t"));
         System.out.println(" ");
         printScore(player);
     }
@@ -110,15 +106,16 @@ public class Line implements AboutLine {
                 score[i]=frame.sumFrame(this,i, 0);
             else
                 score[i]=frame.sumFrame(this,i, score[i-1] );
-            if (i==0)
-                System.out.println("Score "+i+" es: "+score[i]+" anterior "+0);
-            else
-                System.out.println("Score "+i+" es: "+score[i]+" anterior "+score[i-1]);
+//            if (i==0)
+//                System.out.println("Score "+i+" es: "+score[i]+" anterior "+0);
+//            else
+//                System.out.println("Score "+i+" es: "+score[i]+" anterior "+score[i-1]);
 
         }
-        System.out.print("Score\t");
+        System.out.print("Score\t\t");
         Arrays.stream(this.score)
-                .forEach(x->System.out.println(x));
+                .forEach(x->System.out.print(x+"\t\t"));
+        System.out.println(" ");
     }
 
 

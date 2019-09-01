@@ -14,10 +14,10 @@ public class App
     public static void main( String[] args )
     {
 
-        System.out.println( "Welcome to the Bowling" );
+        System.out.println( "Welcome to the Bowling");
         Game game=new Game();
         // Read the file with the Game's data
-        try (Stream<String> stream = Files.lines(Paths.get("scores.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
             stream
                     .map(String::trim)
                     .forEach(x->game.processData(x));
