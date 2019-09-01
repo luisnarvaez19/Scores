@@ -1,6 +1,7 @@
 package com.bowling;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Player implements AboutPlayer {
     private String name;        //  Player name
@@ -128,5 +129,18 @@ public class Player implements AboutPlayer {
         return mensaje;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Player)) {
+            return false;
+        }
+        Player user = (Player) o;
+        return  Objects.equals(name, user.name);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
