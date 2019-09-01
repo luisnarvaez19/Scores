@@ -26,5 +26,17 @@ public class GameTest {
         test1 = "Jeff 5";
         testReady1=g.areBadFields(test1);
         assertNotNull(testReady1);
+
+        test1 = "Jeff\t5\t3";
+        testReady1=g.areBadFields(test1);
+        assertNotNull(testReady1);
+
+        test1 = "Jeff\t5\t3";
+        testReady1=g.areBadFields(test1);
+        assertNotNull(testReady1);
+
+        test1 = "Jeff\t-3";
+        testReady1=g.areBadFields(test1);
+        assertNotNull(testReady1);
     }
 }

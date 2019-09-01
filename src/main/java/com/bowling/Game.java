@@ -109,6 +109,7 @@ public class Game implements AboutGame {
             Integer num=isNumeric(value2);
             if (num!=null) {
               if (num>10)  return("Error in the line:  "+line+". Error in the number of pines. It cannot be greater than 10");
+              if (num<0)  return("Error in the line:  "+line+". Error in the number of pines. It cannot be negative");
             } else {
                 if (!("F".equals(value2)))
                     return("Error in the line:  "+line+". Only the character F is accepted. No other character");

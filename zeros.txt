@@ -39,4 +39,8 @@ Jeff	0
 John	0
 John	0
 
-Mas de 10 tiros.  Que el numero sea negativo
+1. Mas de 10 tiros.
+2. Que el numero sea negativo
+3. El archivo de entrada no existe
+
+
