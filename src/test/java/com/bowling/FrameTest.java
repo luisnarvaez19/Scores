@@ -28,12 +28,12 @@ public class FrameTest {
         frame.getRolls().add("2");
         frame.getRolls().add("9");
 
-        assertTrue(frame.isSpare(frame));
+        assertTrue(frame.sumMore10(frame));
 
         Frame frame2=new Frame();
         frame2.getRolls().add("2");
         frame2.getRolls().add("6");
 
-        assertFalse(frame.isSpare(frame2));
+        assertFalse(frame.sumMore10(frame2));
     }
 }
