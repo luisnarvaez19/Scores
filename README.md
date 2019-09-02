@@ -39,3 +39,6 @@ Use Java 8 streams and lambdas
 
 $  java -jar ./target/Score-1.0-SNAPSHOT.jar testfile
 
+## Testfiles
+
+There is several testfiles here:  scores.txt, strikes.txt, scores_2.txt, zeros.txt, zeros_2.txt 
