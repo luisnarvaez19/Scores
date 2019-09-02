@@ -8,6 +8,13 @@ public class Line implements AboutLine {
     private List<Frame> frames;   //  Represents the complete player line
     private Integer[] score;
 
+    public Integer[] getScore() {
+        return score;
+    }
+
+    public void setScore(Integer[] score) {
+        this.score = score;
+    }
 
     public Line(){
         this.frames=new ArrayList<>();
@@ -73,6 +80,8 @@ public class Line implements AboutLine {
             if (((frames!=10) && (pos>2)) || ((frames==10) && (pos>3))){
                 return ("The player: "+player.getName()+" has a lot of throws for a frame");
             }
+
+
         }
         return null;
     }
@@ -87,11 +96,11 @@ public class Line implements AboutLine {
         System.out.println(player.getName());
         System.out.print("Pinfalls\t");
         this.getFrames().stream()
-                .forEach(x->{
-                                if (x.getRolls().size()==2)
-                                    System.out.print(x.getRolls().get(0)+"\t"+x.getRolls().get(1)+"\t");
+                .forEach(frame->{
+                                if (frame.getRolls().size()==2)
+                                    System.out.print(frame.getRolls().get(0)+"\t"+frame.getRolls().get(1)+"\t");
                                 else
-                                    System.out.print(x.getRolls().get(0)+"\t"+x.getRolls().get(1)+"\t"+x.getRolls().get(2)+"\t");
+                                    System.out.print(frame.getRolls().get(0)+"\t"+frame.getRolls().get(1)+"\t"+frame.getRolls().get(2)+"\t");
                             });
 //                .forEach(x->System.out.print(x.getRolls().size()+"\t"));
         System.out.println(" ");
@@ -110,11 +119,9 @@ public class Line implements AboutLine {
             Frame frame=this.getFrames().get(i);
             Integer size=frame.getRolls().size();
             if (i==0)
-                //score[i]=frame.sumFrame(this,i, 0);
                 score[i]=frame.totFrame(this,i,0,0);
             else {
                 if (i<9)
-                    //score[i]=frame.sumFrame(this,i, score[i-1] );
                     score[i]=frame.totFrame(this,i,score[i-1] ,0);
                 else {
                     Integer num0, num1;
@@ -139,14 +146,7 @@ public class Line implements AboutLine {
                 }
 
             }
-
-
-//            if (i==0)
-//                System.out.println("Score "+i+" es: "+score[i]+" anterior "+0);
-//            else
-//                System.out.println("Score "+i+" es: "+score[i]+" anterior "+score[i-1]);
-
-        }
+         }
         System.out.print("Score\t\t");
         Arrays.stream(this.score)
                 .forEach(x->System.out.print(x+"\t\t"));

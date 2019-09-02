@@ -89,7 +89,7 @@ public class Game implements AboutGame {
     /**
      * Check if the player has already been ruled out due to a previous error
      *
-     * @param data
+     * @param exist
      * @return
      */
     @Override
@@ -155,7 +155,8 @@ public class Game implements AboutGame {
             this.currentPlayer="";
             return ("The player: "+player.getName()+" made more than 10 frames");
         }
-        if ((val.equals("10") && (frames!=10))) this.currentPlayer="";
+        Integer pos=player.getNroThrows();
+        if ((pos==2) && (frames!=10)) this.currentPlayer="";
         if (message!=null) {
             System.out.println(message);
             p.removePlayer(this,name);
